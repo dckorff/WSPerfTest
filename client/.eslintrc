@@ -18,6 +18,8 @@
 	"globals": {
     "console": true,
     "document": false,
-    "window": false
+    "window": false,
+    "clearInterval": false,
+    "setInterval": false
   }
 }

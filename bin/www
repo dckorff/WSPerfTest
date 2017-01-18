@@ -119,6 +119,17 @@ io.on('connection', function(socket){
     
   });
 
+  socket.on('ROUND_TRIP_TO_SERVER', function(message){
+    //console.log('ROUND_TRIP_TO_SERVER');
+    message.serverSendTime = new Date();
+    //setTimeout(function(){
+      socket.emit('ROUND_TRIP_TO_CLIENT', message)  
+    //}, 1000)
+    
+    //socket.broadcast.emit('hi');
+    //io.emit('ROUND_TRIP_TO_CLIENT', message)
+  });
+
 });
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
