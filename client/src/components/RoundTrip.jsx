@@ -172,7 +172,7 @@ export default class RoundTrip extends React.Component {
 		for(let iRow = 0; iRow < size; iRow++){
 			let row = [];
 			for(let iColumn = 0; iColumn < size; iColumn++){			
-				row.push( (Math.random() * (this.state.tableDigits*10) ).toFixed(0) )
+				row.push( Math.floor(Math.random() * Math.pow(10, this.state.tableDigits) ));
 				//row.push( Math.random() )
 			}
 			data.push(row);
