@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Dataable extends React.Component {
+export default class DataTable extends React.Component {
 
 	render(){
 		return (

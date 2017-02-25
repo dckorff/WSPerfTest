@@ -1,10 +1,7 @@
 import React from 'react';
-
-//import Chart from './Chart.jsx';
-import HighChart from './HighChart.jsx';
-//import Plotly from './Plotly.jsx';
 import TimeTable from './TimeTable.jsx';
 import DataTable from './DataTable.jsx';
+import SvgGraph from './SvgGraph.jsx';
 
 export default class RoundTrip extends React.Component {
 
@@ -36,9 +33,6 @@ export default class RoundTrip extends React.Component {
 	}
 
 	messageRecieved(message){
-
-		// console.log("message");
-		// console.log(message);
 		
 		message.clientSendTime = Date.parse(message.clientSendTime);
 		message.serverSendTime = Date.parse(message.serverSendTime);
@@ -74,16 +68,6 @@ export default class RoundTrip extends React.Component {
 		let serverToClientAvg = serverToClientSum / messages.length;
 		let clientToClientAvg = clientToClientSum / messages.length;
 
-
-		// points.x.shift();
-		// points.y.shift();
-
-		// points.x.push(1);
-		// points.y.push(clientToClientAvg);
-
-		// let strPoints = points.x.reduce( (x, cur='') => { cur+=  }) 
-		// points.shift();
-		// points.push({})
 		let points = this.state.points;
 
 		if (points.length >= 100){
@@ -91,21 +75,10 @@ export default class RoundTrip extends React.Component {
 		}
 		points.push(clientToClientAvg)
 
-		// let svgPoints = points.reduce( (point, curr='', index) => { 
-		// 	console.log("-----------")
-		// 	console.log(curr)
-		// 	console.log(index)
-		// 	console.log(point)
-		// 	console.log(`${index},${point} `)
-		// 	return curr ? `${index},${point}` :  
-		// } )
-
 		let svgPoints = '';
 		points.forEach( (point, index) => {
 			svgPoints += `${index*5},${point*10} `;
 		});
-
-		//console.log(svgPoints);
 
 		this.setState(
 			{
@@ -122,15 +95,6 @@ export default class RoundTrip extends React.Component {
 	}
 
 
-
-	// componentWillUpdate(nextProps, nextState) {
-
-	// }
-
-	// onChangeInterval(event){
-	// 	this.setState({textInterval: event.target.value});
-	// }
-
 	onClickApplyInterval(){
 		
 		let interval = parseInt(this.state.textInterval);
@@ -141,14 +105,10 @@ export default class RoundTrip extends React.Component {
 		
 		let me = this;
 
-		//this.data = this.initData();
-
 		this._intervalId = setInterval(
 				()=>{
-					//console.log("do something!")
 
 					let message = {
-						//data: me.data,
 						data: me.initData(),
 						clientSendTime: new Date(),
 						connectionId: me.props.connection.socket.id
@@ -175,7 +135,6 @@ export default class RoundTrip extends React.Component {
 			let row = [];
 			for(let iColumn = 0; iColumn < size; iColumn++){			
 				row.push( Math.floor(Math.random() * Math.pow(10, this.state.tableDigits) ));
-				//row.push( Math.random() )
 			}
 			data.push(row);
 		}
@@ -212,22 +171,33 @@ export default class RoundTrip extends React.Component {
 						</tbody>
 					</table>
 					<div style={{display:'inline-block', verticalAlign: 'top'}}>
-						
-						<TimeTable messages={this.state.messages} />
 
-						<DataTable currentMessage={this.state.currentMessage} />
-						
+
+						<div className="panel panel-default">
+							<div className="panel-heading">Response Times</div>
+							<div className="panel-body">						
+								<TimeTable messages={this.state.messages} />
+							</div>
+						</div>
+
+						<div className="panel panel-default">
+							<div className="panel-heading">Data Payload</div>
+							<div className="panel-body">
+								<DataTable currentMessage={this.state.currentMessage} />
+							</div>
+						</div>
+
 					</div>
 					<div style={{display:'inline-block'}}>
-						{/*
-						<Chart data={ {clientToServerAvg: this.state.clientToServerAvg} } />
-						<HighChart data={ {clientToServerAvg: this.state.clientToServerAvg} } />
-						<PlotlyChart data={ {clientToServerAvg: this.state.clientToServerAvg} } />
-						*/}
 
-						<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
-							<polyline fill="none" stroke="black" points={this.state.svgPoints}/>
-						</svg>
+						<div className="panel panel-default">
+							<div className="panel-heading">Round Trip Average</div>
+							<div className="panel-body">
+								<SvgGraph svgPoints={this.state.svgPoints} />
+							</div>
+						</div>
+
+						
 						
 					</div>
 				</div>
