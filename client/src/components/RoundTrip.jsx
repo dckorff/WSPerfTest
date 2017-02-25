@@ -3,6 +3,8 @@ import React from 'react';
 //import Chart from './Chart.jsx';
 import HighChart from './HighChart.jsx';
 //import Plotly from './Plotly.jsx';
+import TimeTable from './TimeTable.jsx';
+import DataTable from './DataTable.jsx';
 
 export default class RoundTrip extends React.Component {
 
@@ -210,41 +212,11 @@ export default class RoundTrip extends React.Component {
 						</tbody>
 					</table>
 					<div style={{display:'inline-block', verticalAlign: 'top'}}>
-						<table>
-							<thead>
-								<tr>
-									<th>Client send time</th>
-									<th>Server send time</th>
-									<th>Client received time</th>
-								</tr>
-							</thead>
-							<tbody>
-								{this.state.messages.map( (message, index) => { 
-									return (
-										<tr key={index} >
-											<td>{message.clientSendTime}</td>
-											<td>{message.serverSendTime}</td>
-											<td>{message.clientRecievedTime.toString()}</td>													
-										</tr> 
-									)})
-								}
-							</tbody>
-						</table>
+						
+						<TimeTable messages={this.state.messages} />
 
-						<table>
-							<tbody>
-								{this.state.currentMessage.data.map( (row, iRow) => { 
-									return (
-										<tr key={iRow}>
-											{
-												row.map( (column, iCol) => {return (<td key={iCol}>{column}</td>)}
-													)
-											}
-										</tr>
-									)}
-								)}
-							</tbody>
-						</table>
+						<DataTable currentMessage={this.state.currentMessage} />
+						
 					</div>
 					<div style={{display:'inline-block'}}>
 						{/*
@@ -254,7 +226,7 @@ export default class RoundTrip extends React.Component {
 						*/}
 
 						<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
-						  <polyline fill="none" stroke="black" points={this.state.svgPoints}/>
+							<polyline fill="none" stroke="black" points={this.state.svgPoints}/>
 						</svg>
 						
 					</div>
