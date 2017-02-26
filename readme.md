@@ -1,19 +1,19 @@
-WebSockets + React Performance Test
+# WebSockets + NodeJs/Socket.io + React Performance Test
 
-Requirements
-Node.js
+Requirements:
+> Node.js
 
 Project setup:
-npm install
+```$ npm install```
 
 Build:
-npm run build
+```$ npm run build```
 
 Watch (for development):
-npm run watch
+```$ npm run watch```
 
 Run the web site:
-npm start
+```$ npm start```
 
 Browse:
-http://localhost:3000
+```http://localhost:3000```
