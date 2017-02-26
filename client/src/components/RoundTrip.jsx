@@ -1,5 +1,5 @@
 import React from 'react';
-import TimeTable from './TimeTable.jsx';
+// import TimeTable from './TimeTable.jsx';
 import DataTable from './DataTable.jsx';
 import SvgGraph from './SvgGraph.jsx';
 
@@ -150,57 +150,70 @@ export default class RoundTrip extends React.Component {
 	render(){
 		return (
 			<div>
-				RoundTrip
-				<div>
-					<label>Interval (ms)</label><input type="text" value={this.state.textInterval} onChange={event => this.setState({textInterval: event.target.value})} />
-					<button onClick={this.onClickApplyInterval.bind(this)}>Apply Interval</button>
-					<button onClick={this.onClickStop.bind(this)}>Stop</button>
-				</div>
-				<div>
-					<label>Table Dimentions:</label> <input type="text" value={this.state.tableDimension} onChange={event => this.setState({tableDimension: event.target.value})} />
-				</div>
-				<div>
-					<label>Table Digits</label> <input type="text" value={this.state.tableDigits} onChange={event => this.setState({tableDigits: event.target.value})} />
-				</div>
-				<div>
-					<table>
-						<tbody>
-							<tr><td>Client To Server Average</td><td>{this.state.clientToServerAvg}</td></tr>
-							<tr><td>Server To Client Average</td><td>{this.state.serverToClientAvg}</td></tr>
-							<tr><td>Client To Client (round trip) Average</td><td>{this.state.clientToClientAvg}</td></tr>
-						</tbody>
-					</table>
-					<div style={{display:'inline-block', verticalAlign: 'top'}}>
+				
+					<div className="container-fluid">
+						<div className="row">
+							
+							RoundTrip
 
-
-						<div className="panel panel-default">
-							<div className="panel-heading">Response Times</div>
-							<div className="panel-body">						
-								<TimeTable messages={this.state.messages} />
+							<div >
+								<label>Interval (ms)</label><input type="text" value={this.state.textInterval} onChange={event => this.setState({textInterval: event.target.value})} />
+								<button onClick={this.onClickApplyInterval.bind(this)}>Apply Interval</button>
+								<button onClick={this.onClickStop.bind(this)}>Stop</button>
 							</div>
-						</div>
-
-						<div className="panel panel-default">
-							<div className="panel-heading">Data Payload</div>
-							<div className="panel-body">
-								<DataTable currentMessage={this.state.currentMessage} />
+							<div>
+								<label>Table Dimentions:</label> <input type="text" value={this.state.tableDimension} onChange={event => this.setState({tableDimension: event.target.value})} />
 							</div>
-						</div>
+							<div>
+								<label>Table Digits</label> <input type="text" value={this.state.tableDigits} onChange={event => this.setState({tableDigits: event.target.value})} />
+							</div>
+							
 
+							<table class="table table-condensed">
+								<tbody>
+									<tr><td>Client To Server Average</td><td>{this.state.clientToServerAvg}</td></tr>
+									<tr><td>Server To Client Average</td><td>{this.state.serverToClientAvg}</td></tr>
+									<tr><td>Client To Client (round trip) Average</td><td>{this.state.clientToClientAvg}</td></tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-					<div style={{display:'inline-block'}}>
 
-						<div className="panel panel-default">
-							<div className="panel-heading">Round Trip Average</div>
-							<div className="panel-body">
-								<SvgGraph svgPoints={this.state.svgPoints} />
+					<div className="container-fluid">
+						<div className="row">
+
+							<div className="col-md-6">
+								<div className="panel panel-default">
+									<div className="panel-heading">Round Trip Average</div>
+									<div className="panel-body">
+										<SvgGraph svgPoints={this.state.svgPoints} />
+									</div>
+								</div>
 							</div>
-						</div>
 
-						
-						
+							{/*
+							<div style={{display:'inline-block', verticalAlign: 'top'}}>
+								<div className="panel panel-default">
+									<div className="panel-heading">Response Times</div>
+									<div className="panel-body">						
+										<TimeTable messages={this.state.messages} />
+									</div>
+								</div>
+							</div>
+							*/}
+							
+							<div className="col-md-6">
+								<div className="panel panel-default">
+									<div className="panel-heading">Data Payload</div>
+									<div className="panel-body" style={{overflow: 'auto'}}>
+										<DataTable currentMessage={this.state.currentMessage} />
+									</div>
+								</div>
+							</div>
+
+						</div>
 					</div>
-				</div>
+					
 			</div>
 		);
 	}
