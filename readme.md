@@ -16,5 +16,5 @@ Run the web site:
 ```$ npm start```
 
 Browse:
-```http://localhost:3000```
+> http://localhost:3000
 
