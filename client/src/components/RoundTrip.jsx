@@ -169,7 +169,7 @@ export default class RoundTrip extends React.Component {
 							</div>
 							
 
-							<table class="table table-condensed">
+							<table className="table table-condensed">
 								<tbody>
 									<tr><td>Client To Server Average</td><td>{this.state.clientToServerAvg}</td></tr>
 									<tr><td>Server To Client Average</td><td>{this.state.serverToClientAvg}</td></tr>
